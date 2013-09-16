@@ -193,6 +193,9 @@ class Repo:
         for fname in ls:
             if re.match('^\.git\/?$', fname):
                 continue
+            # Always ignore .gitignore and .gitmodules files
+            if re.match('^\.git(ignore|modules)$', fname):
+                continue
             link = Link(os.path.join(path, fname), base=self.path)
             ok, link_status = link.status()
             if link_status == "directory":
